@@ -34,6 +34,7 @@
 .sec01 .slide .tit,
 .sec01 .slide .sentence {
   opacity: 0;
+  font-size: 2rem;
 }
 
 .sec01 .slide h2 {
