@@ -13,68 +13,120 @@
 }
 
 .sec01 {
-    .slideBtnOn {
+    .sliBtn {
         position: absolute;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 1000;
+        z-index: 9999;
     }
 
-    .slideBtnOff {
-        position: absolute;
-        top: 95%;
-        left: 50%;
-        width: 100px;
-        height: 25px;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-    }
+    .sli01 {
+        .title {
+            .logo {
+                margin-top: 150px;
+                opacity: 0;
+            }
 
-    .slide {
-
-        .tit,
-        .sentence {
-            opacity: 0;
-            font-size: 2rem;
+            .desc {
+                margin: 20px 30px 10px;
+                color: rgba(0, 0, 0, .5);
+                font-size: 2.73em;
+                font-weight: 300;
+                opacity: 0;
+            }
         }
+    }
+
+    .sli02 {
+        position: relative;
 
         .sentences {
             margin-bottom: 96px;
+            font-size: 2rem;
+
+            .sentence {
+                opacity: 0;
+                margin-bottom: 10px;
+            }
         }
 
-        h2 {
-            color: rgba(0, 0, 0, .5);
-            font-size: 2.73em;
-            font-weight: 300;
-            margin: 20px 30px 10px;
+        .tool {
+            opacity: 0;
         }
+
+        .tool01 {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            transform: rotate(15deg);
+        }
+
+        .tool02 {
+            position: absolute;
+            top: 160px;
+            right: 260px;
+            transform: rotate(-15deg);
+        }
+
+        .tool03 {
+            position: absolute;
+            bottom: 190px;
+            left: 190px;
+            transform: rotate(-15deg);
+        }
+
+        .tool04 {
+            position: absolute;
+            bottom: 200px;
+            right: 200px;
+            transform: rotate(15deg);
+        }
+    }
+
+    .sli03 {}
+
+    .secBtn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        visibility: hidden;
     }
 }
 
 .sec03 {
-    .creater {
+    .production {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        .desc {
+        .planner,
+        .programmer {
+            margin-top: -150px;
+            font-size: 1.25rem;
+
             img {
                 border-radius: 360px;
                 transform: scale(0.5);
+            }
+
+            .desc {
+                margin-bottom: 10px;
             }
         }
 
         .left {
             width: 50vw;
-            height: 100vh;
+            height: 90vh;
             padding: 200px 0 0 125px;
         }
 
         .right {
             width: 50vw;
-            height: 100vh;
+            height: 90vh;
             padding: 200px 125px 0 0;
         }
     }

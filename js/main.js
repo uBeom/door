@@ -15,85 +15,96 @@ fullpage_api.setAllowScrolling(false);
 fullpage_api.setKeyboardScrolling(false);
 
 window.onload = function () {
-    const tits = document.querySelectorAll('.tit');
+    const titLogo = document.querySelector('.title .logo');
+    const titDesc = document.querySelector('.title .desc');
     const sentences = document.querySelectorAll('.sentence');
-    const slideBtn = document.querySelector('.slideBtnOn');
-    const sectionBtn = document.querySelector('.sectionBtn');
-    let sectionBtnCheck = false;
-    let slideBtnCheck = false;
+    const sliBtn = document.querySelector('.sliBtn');
+    const secBtn = document.querySelector('.secBtn');
+    const secBtnImg = document.querySelector('.secBtn .secBtnImg');
+    const tools = document.querySelectorAll('.tools .tool');
+    const prod = document.querySelector('.production');
+    const copy = document.querySelector('.copyright');
 
-    slideBtn.addEventListener('click', slide, false);
-    sectionBtn.addEventListener('mouseover', over, false);
-    sectionBtn.addEventListener('mouseout', out, false);
-    sectionBtn.addEventListener('click', click, false);
+    let sliBtnCheck = false;
+    let secBtnCheck = false;
 
-    tits[0].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
-    tits[0].addEventListener('animationend', () => {
-        tits[1].classList.add('animate__animated', 'animate__fadeIn');
+    sliBtn.addEventListener('click', sliMove, false);
+
+    secBtn.addEventListener('mouseover', () => {
+        if (secBtnCheck === false)
+            secBtnImg.src = './img/1_3_title_btn2.png';
+        else if (secBtnCheck === true)
+            secBtnImg.src = './img/1_3_title_btn3.png';
+    }, false);
+    secBtn.addEventListener('mouseout', () => {
+        if (secBtnCheck === false)
+            secBtnImg.src = './img/1_3_title_btn.png';
+        else if (secBtnCheck === true)
+            secBtnImg.src = './img/1_3_title_btn3.png';
+    }, false);
+    secBtn.addEventListener('click', () => {
+        secBtnCheck = true;
+        secBtnImg.src = './img/1_3_title_btn3.png';
+        setTimeout(fullpage_api.moveTo, 1000, 'page2', 0);
+    }, false);
+
+    titLogo.classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+    titLogo.addEventListener('animationend', () => {
+        titDesc.classList.add('animate__animated', 'animate__fadeIn');
     });
 
-    function sentenAnim() {
+    if (fullpage_api.getActiveSection().index === 2) {
+        // 유니티에서 게임 엔딩을후 버튼을 누를때 적용시켜야함
+        prod.classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+        copy.classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-2s');
+    }
+
+    function sliMove() {
+        if (fullpage_api.getActiveSlide().index === 0 && sliBtnCheck === false) {
+            fullpage_api.moveSlideRight();
+        } else if (fullpage_api.getActiveSlide().index === 1 && sliBtnCheck === true) {
+            fullpage_api.moveSlideRight();
+        }
+        switch (fullpage_api.getActiveSlide().index) {
+            case 1:
+                animSli02();
+                break;
+            case 2:
+                animSli03();
+                break;
+        }
+    }
+
+    function animSli02() {
         sentences[0].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+        tools[0].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
         sentences[0].addEventListener('animationend', () => {
             sentences[0].classList.remove('animate__fadeIn');
             sentences[0].classList.add('animate__fadeOut');
             sentences[1].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+            tools[1].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
         });
         sentences[1].addEventListener('animationend', () => {
             sentences[1].classList.remove('animate__fadeIn');
             sentences[1].classList.add('animate__fadeOut');
             sentences[2].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+            tools[2].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
         })
         sentences[2].addEventListener('animationend', () => {
             sentences[2].classList.remove('animate__fadeIn');
             sentences[2].classList.add('animate__fadeOut');
             sentences[3].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+            tools[3].classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
         })
         sentences[3].addEventListener('animationend', () => {
-            setTimeout(slide2Btn, 1000);
+            setTimeout(() => {
+                sliBtnCheck = true;
+            }, 1000);
         })
     }
 
-    function slide2Btn() {
-        slideBtnCheck = true;
-    }
-
-    function over() {
-        if (sectionBtnCheck === false)
-            sectionBtn.src = './img/1_3_title_btn2.png';
-        else if (sectionBtnCheck === true)
-            sectionBtn.src = './img/1_3_title_btn3.png';
-    }
-
-    function out() {
-        if (sectionBtnCheck === false)
-            sectionBtn.src = './img/1_3_title_btn.png';
-        else if (sectionBtnCheck === true)
-            sectionBtn.src = './img/1_3_title_btn3.png';
-    }
-
-    function click() {
-        sectionBtnCheck = true;
-        sectionBtn.src = './img/1_3_title_btn3.png';
-        setTimeout(fullpage_api.moveTo, 1000, 'page2', 0);
-    }
-
-    function slide() {
-        if (fullpage_api.getActiveSlide().index === 0) {
-            fullpage_api.moveSlideRight();
-        }
-
-        if (fullpage_api.getActiveSlide().index === 1 && slideBtnCheck === true) {
-            fullpage_api.moveSlideRight();
-        }
-        switch (fullpage_api.getActiveSlide().index) {
-            case 1:
-                sentenAnim();
-                break;
-            case 2:
-                slideBtn.classList.remove('slideBtnOn');
-                slideBtn.classList.add('slideBtnOff');
-                break;
-        }
+    function animSli03() {
+        secBtn.style.visibility = "visible";
+        secBtn.classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-2s');
     }
 }
